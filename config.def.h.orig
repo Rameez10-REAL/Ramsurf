@@ -7,7 +7,7 @@ static char *certdir        = "~/.surf/certificates/";
 static char *cachedir       = "~/.surf/cache/";
 static char *cookiefile     = "~/.surf/cookies.txt";
 
-/* Webkit default features for adblocking something likes this is recomended https://github.com/StevenBlack/hosts A guide to do this is here https://odysee.com/@AlphaNerd:8/block-ads-and-unwated-sites-without-a:6 */
+/* Webkit default features */
 /* Highest priority value will be used.
  * Default parameters are priority 0
  * Per-uri parameters are priority 1
@@ -20,7 +20,7 @@ static Parameter defconfig[ParameterLast] = {
 	[Certificate]         =       { { .i = 0 },     },
 	[CaretBrowsing]       =       { { .i = 0 },     },
 	[CookiePolicies]      =       { { .v = "@Aa" }, },
-	[DarkMode]            =       { { .i = 1 },     },
+	[DarkMode]            =       { { .i = 0 },     },
 	[DefaultCharset]      =       { { .v = "UTF-8" }, },
 	[DiskCache]           =       { { .i = 1 },     },
 	[DNSPrefetch]         =       { { .i = 0 },     },
@@ -42,7 +42,7 @@ static Parameter defconfig[ParameterLast] = {
 	[ShowIndicators]      =       { { .i = 1 },     },
 	[SiteQuirks]          =       { { .i = 1 },     },
 	[SmoothScrolling]     =       { { .i = 0 },     },
-	[SpellChecking]       =       { { .i = 1 },     },
+	[SpellChecking]       =       { { .i = 0 },     },
 	[SpellLanguages]      =       { { .v = ((char *[]){ "en_US", NULL }) }, },
 	[StrictTLS]           =       { { .i = 1 },     },
 	[Style]               =       { { .i = 1 },     },
@@ -194,9 +194,3 @@ static Button buttons[] = {
 	{ OnAny,        0,              9,      clicknavigate,  { .i = +1 },    1 },
 	{ OnMedia,      MODKEY,         1,      clickexternplayer, { 0 },       1 },
 };
-
-static SearchEngine searchengines[] = {
-	{ "st ",   "http://www.startpage.com/search?q=%s"   },
-	{ "s", "https://search.sapti.me/search?q=%s" },
-};
-
