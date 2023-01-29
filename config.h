@@ -5,6 +5,7 @@ static char *scriptfile     = "~/.config/surf/script.js";
 static char *styledir       = "~/.config/surf/styles/";
 static char *certdir        = "~/.config/surf/certificates/";
 static char *cachedir       = "~/.config/surf/cache/";
+static char *historyfile    = "~/.config/surf/history";
 static char *cookiefile     = "~/.config/surf/cookies.txt";
 
 /* Webkit default features for adblocking something likes this is recomended https://github.com/StevenBlack/hosts A guide to do this is here https://odysee.com/@AlphaNerd:8/block-ads-and-unwated-sites-without-a:6 */
