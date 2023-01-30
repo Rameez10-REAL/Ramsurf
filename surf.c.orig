@@ -133,11 +133,6 @@ typedef struct {
 } Button;
 
 typedef struct {
-	char *token;
-	char *uri;
-} SearchEngine;
-
-typedef struct {
 	const char *uri;
 	Parameter config[ParameterLast];
 	regex_t re;
@@ -192,8 +187,6 @@ static void initwebextensions(WebKitWebContext *wc, Client *c);
 static GtkWidget *createview(WebKitWebView *v, WebKitNavigationAction *a,
                              Client *c);
 static gboolean buttonreleased(GtkWidget *w, GdkEvent *e, Client *c);
-static gboolean scrollmultiply(GtkWidget *w, GdkEvent *e, Client *c);
-
 static GdkFilterReturn processx(GdkXEvent *xevent, GdkEvent *event,
                                 gpointer d);
 static gboolean winevent(GtkWidget *w, GdkEvent *e, Client *c);
@@ -228,7 +221,6 @@ static void webprocessterminated(WebKitWebView *v,
                                  Client *c);
 static void closeview(WebKitWebView *v, Client *c);
 static void destroywin(GtkWidget* w, Client *c);
-static gchar *parseuri(const gchar *uri);
 
 /* Hotkeys */
 static void pasteuri(GtkClipboard *clipboard, const char *text, gpointer d);
@@ -591,7 +583,7 @@ loaduri(Client *c, const Arg *a)
 			url = g_strdup_printf("file://%s", path);
 			free(path);
 		} else {
-			url = parseuri(uri);
+			url = g_strdup_printf("http://%s", uri);
 		}
 		if (apath != uri)
 			free(apath);
@@ -1216,8 +1208,6 @@ newview(Client *c, WebKitWebView *rv)
 			 G_CALLBACK(titlechanged), c);
 	g_signal_connect(G_OBJECT(v), "button-release-event",
 			 G_CALLBACK(buttonreleased), c);
-	g_signal_connect(G_OBJECT(v), "scroll-event",
-			 G_CALLBACK(scrollmultiply), c);
 	g_signal_connect(G_OBJECT(v), "close",
 			G_CALLBACK(closeview), c);
 	g_signal_connect(G_OBJECT(v), "create",
@@ -1325,13 +1315,6 @@ buttonreleased(GtkWidget *w, GdkEvent *e, Client *c)
 		}
 	}
 
-	return FALSE;
-}
-
-gboolean
-scrollmultiply(GtkWidget *w, GdkEvent *e, Client *c)
-{
-	e->scroll.delta_y*=7;
 	return FALSE;
 }
 
@@ -1827,20 +1810,6 @@ destroywin(GtkWidget* w, Client *c)
 	destroyclient(c);
 	if (!clients)
 		gtk_main_quit();
-}
-
-gchar *
-parseuri(const gchar *uri)
-{
-	guint i;
-
-	for (i = 0; i < LENGTH(searchengines); i++) {
-		if (g_str_has_prefix(uri, searchengines[i].token))
-			return g_strdup_printf(searchengines[i].uri,
-					       uri + strlen(searchengines[i].token));
-	}
-
-	return g_strdup_printf("http://%s", uri);
 }
 
 void

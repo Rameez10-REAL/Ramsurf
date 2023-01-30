@@ -1,10 +1,10 @@
 /* modifier 0 means no modifier */
 static int surfuseragent    = 1;  /* Append Surf version to default WebKit user agent */
-static char *fulluseragent  = ""; /* Or override the whole user agent string Changed to not clutter .home */
+static char *fulluseragent  = "Mozilla/5.0 (Windows NT 10.0; rv:102.0) Gecko/20100101 Firefox/102.0"; /* Or override the whole user agent string Changed to not clutter .home The browser angnet is coppied from tor*/
 static char *scriptfile     = "~/.config/surf/script.js";
 static char *styledir       = "~/.config/surf/styles/";
 static char *certdir        = "~/.config/surf/certificates/";
-static char *cachedir       = "~/.config/surf/cache/";
+static char *cachedir       = "~/.cache/surf";
 static char *historyfile    = "~/.config/surf/history";
 static char *cookiefile     = "~/.config/surf/cookies.txt";
 
@@ -31,15 +31,15 @@ static Parameter defconfig[ParameterLast] = {
 	[FrameFlattening]     =       { { .i = 0 },     },
 	[Geolocation]         =       { { .i = 0 },     },
 	[HideBackground]      =       { { .i = 0 },     },
-	[Inspector]           =       { { .i = 0 },     },
-	[Java]                =       { { .i = 1 },     },
+	[Inspector]           =       { { .i = 1 },     },
+	[Java]                =       { { .i = 0 },     },
 	[JavaScript]          =       { { .i = 1 },     },
 	[KioskMode]           =       { { .i = 0 },     },
 	[LoadImages]          =       { { .i = 1 },     },
-	[MediaManualPlay]     =       { { .i = 1 },     },
+	[MediaManualPlay]     =       { { .i = 0 },     },
 	[PreferredLanguages]  =       { { .v = (char *[]){ NULL } }, },
 	[RunInFullscreen]     =       { { .i = 0 },     },
-	[ScrollBars]          =       { { .i = 1 },     },
+	[ScrollBars]          =       { { .i = 0 },     },
 	[ShowIndicators]      =       { { .i = 1 },     },
 	[SiteQuirks]          =       { { .i = 1 },     },
 	[SmoothScrolling]     =       { { .i = 0 },     },
@@ -47,7 +47,7 @@ static Parameter defconfig[ParameterLast] = {
 	[SpellLanguages]      =       { { .v = ((char *[]){ "en_US", NULL }) }, },
 	[StrictTLS]           =       { { .i = 1 },     },
 	[Style]               =       { { .i = 1 },     },
-	[WebGL]               =       { { .i = 0 },     },
+	[WebGL]               =       { { .i = 1 },     },
 	[ZoomLevel]           =       { { .f = 1.0 },   },
 };
 
@@ -199,6 +199,6 @@ static Button buttons[] = {
 
 static SearchEngine searchengines[] = {
 	{ "st ",   "http://www.startpage.com/search?q=%s"   },
-	{ "s", "https://search.sapti.me/search?q=%s" },
+	{ "s ", "https://search.sapti.me/search?q=%s" },
 };
 
